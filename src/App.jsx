@@ -10,14 +10,28 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 
-// Iconsax
-import {
-  Calculator, Weight, People, ShieldTick, ArrowRight, Health,
-  DocumentText, Warning2, Home2, User, Facebook, Instagram,
-  VideoPlay, Timer1, StatusUp, SearchNormal1, Flash, Note,
-  MedalStar, Clock, Blend2, Element3, HambergerMenu,
-  Book1, Gift, Briefcase, Heart,
-} from 'iconsax-react'
+// Iconsax – direct imports for tree-shaking
+import Calculator from 'iconsax-react/dist/esm/Calculator'
+import Weight from 'iconsax-react/dist/esm/Weight'
+import ShieldTick from 'iconsax-react/dist/esm/ShieldTick'
+import ArrowRight from 'iconsax-react/dist/esm/ArrowRight'
+import Health from 'iconsax-react/dist/esm/Health'
+import DocumentText from 'iconsax-react/dist/esm/DocumentText'
+import Warning2 from 'iconsax-react/dist/esm/Warning2'
+import Facebook from 'iconsax-react/dist/esm/Facebook'
+import Instagram from 'iconsax-react/dist/esm/Instagram'
+import VideoPlay from 'iconsax-react/dist/esm/VideoPlay'
+import StatusUp from 'iconsax-react/dist/esm/StatusUp'
+import SearchNormal1 from 'iconsax-react/dist/esm/SearchNormal1'
+import Flash from 'iconsax-react/dist/esm/Flash'
+import Element3 from 'iconsax-react/dist/esm/Element3'
+import HambergerMenu from 'iconsax-react/dist/esm/HambergerMenu'
+import Book1 from 'iconsax-react/dist/esm/Book1'
+import Gift from 'iconsax-react/dist/esm/Gift'
+import Briefcase from 'iconsax-react/dist/esm/Briefcase'
+import Heart from 'iconsax-react/dist/esm/Heart'
+import Blend2 from 'iconsax-react/dist/esm/Blend2'
+import Clock from 'iconsax-react/dist/esm/Clock'
 
 // ─── MEDICATION DATABASE ───
 const medications = {
@@ -163,7 +177,7 @@ export default function App() {
           {/* Brand */}
           <a href="#" className="flex items-center group">
             <img
-              src="/logo-medex.png"
+              src="/logo-medex.webp"
               alt="Médico Exponencial"
               className="h-8 sm:h-9 w-auto"
             />
@@ -315,15 +329,15 @@ export default function App() {
           </defs>
         </svg>
 
-        {/* Gradient orbs — animated */}
+        {/* Gradient orbs — animated (GPU composited) */}
         <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full pointer-events-none animate-glow-drift-1"
-          style={{ background: 'radial-gradient(circle, rgba(2,191,255,0.35) 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(2,191,255,0.35) 0%, transparent 70%)', willChange: 'transform, opacity', contain: 'strict' }} />
         <div className="absolute top-10 right-0 w-80 h-80 rounded-full pointer-events-none animate-glow-drift-2"
-          style={{ background: 'radial-gradient(circle, rgba(45,121,255,0.37) 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(45,121,255,0.37) 0%, transparent 70%)', willChange: 'transform, opacity', contain: 'strict' }} />
         <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full pointer-events-none animate-glow-drift-3"
-          style={{ background: 'radial-gradient(circle, rgba(244,157,37,0.25) 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(244,157,37,0.25) 0%, transparent 70%)', willChange: 'transform, opacity', contain: 'strict' }} />
         <div className="absolute top-1/2 right-1/4 w-72 h-72 rounded-full pointer-events-none animate-glow-drift-2"
-          style={{ background: 'radial-gradient(circle, rgba(45,121,255,0.12) 0%, transparent 70%)', animationDelay: '-5s' }} />
+          style={{ background: 'radial-gradient(circle, rgba(45,121,255,0.12) 0%, transparent 70%)', animationDelay: '-5s', willChange: 'transform, opacity', contain: 'strict' }} />
 
         {/* Floating particles */}
         <Particle style={{ top: '18%', left: '8%', width: 6, height: 6, animationDelay: '0s' }} />
@@ -889,6 +903,8 @@ export default function App() {
               <img
                 src="/ems-logo.svg"
                 alt="EMS"
+                loading="lazy"
+                decoding="async"
                 className="h-10 w-auto"
               />
               <div className="flex gap-3">
