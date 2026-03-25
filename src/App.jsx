@@ -6,32 +6,18 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+// Select removed — using native <select> for lighter bundle
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 
-// Iconsax – direct imports for tree-shaking
-import Calculator from 'iconsax-react/dist/esm/Calculator'
-import Weight from 'iconsax-react/dist/esm/Weight'
-import ShieldTick from 'iconsax-react/dist/esm/ShieldTick'
-import ArrowRight from 'iconsax-react/dist/esm/ArrowRight'
-import Health from 'iconsax-react/dist/esm/Health'
-import DocumentText from 'iconsax-react/dist/esm/DocumentText'
-import Warning2 from 'iconsax-react/dist/esm/Warning2'
-import Facebook from 'iconsax-react/dist/esm/Facebook'
-import Instagram from 'iconsax-react/dist/esm/Instagram'
-import VideoPlay from 'iconsax-react/dist/esm/VideoPlay'
-import StatusUp from 'iconsax-react/dist/esm/StatusUp'
-import SearchNormal1 from 'iconsax-react/dist/esm/SearchNormal1'
-import Flash from 'iconsax-react/dist/esm/Flash'
-import Element3 from 'iconsax-react/dist/esm/Element3'
-import HambergerMenu from 'iconsax-react/dist/esm/HambergerMenu'
-import Book1 from 'iconsax-react/dist/esm/Book1'
-import Gift from 'iconsax-react/dist/esm/Gift'
-import Briefcase from 'iconsax-react/dist/esm/Briefcase'
-import Heart from 'iconsax-react/dist/esm/Heart'
-import Blend2 from 'iconsax-react/dist/esm/Blend2'
-import Clock from 'iconsax-react/dist/esm/Clock'
+// Inline SVG icons — replaces iconsax-react (~290KB → ~8KB)
+import {
+  Calculator, Weight, ShieldTick, ArrowRight, Health,
+  DocumentText, Warning2, Facebook, Instagram,
+  VideoPlay, StatusUp, SearchNormal1, Flash,
+  Element3, HambergerMenu, Book1, Gift, Briefcase,
+  Heart, Blend2, Note, Clock,
+} from './icons'
 
 // ─── MEDICATION DATABASE ───
 const medications = {
@@ -462,26 +448,19 @@ export default function App() {
                     <Label className="text-sm font-bold text-foreground">
                       Selecione a concentração diária desejada
                     </Label>
-                    <Select
+                    <select
                       value={medKey}
-                      onValueChange={(v) => { setMedKey(v); setConcIdx(''); setResult(null); setErrors(prev => ({ ...prev, med: null })) }}
+                      onChange={(e) => { setMedKey(e.target.value); setConcIdx(''); setResult(null); setErrors(prev => ({ ...prev, med: null })) }}
+                      className={cn(
+                        'w-full h-9 rounded-lg border border-border bg-muted px-3 text-sm transition-all appearance-none bg-[url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 fill=%27%23666%27 viewBox=%270 0 16 16%27%3E%3Cpath d=%27M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z%27/%3E%3C/svg%3E")] bg-[length:12px] bg-[right_12px_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue',
+                        errors.med && 'border-red-400 bg-red-50/50'
+                      )}
                     >
-                      <SelectTrigger
-                        className={cn(
-                          'w-full h-9 rounded-lg border-border bg-muted transition-all',
-                          errors.med && 'border-red-400 bg-red-50/50'
-                        )}
-                      >
-                        <SelectValue placeholder="Medicamento" />
-                      </SelectTrigger>
-                      <SelectContent className="rounded-lg border-border shadow-xl">
-                        {Object.entries(medications).map(([key, m]) => (
-                          <SelectItem key={key} value={key} className="rounded-lg cursor-pointer">
-                            {m.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                      <option value="" disabled>Medicamento</option>
+                      {Object.entries(medications).map(([key, m]) => (
+                        <option key={key} value={key}>{m.name}</option>
+                      ))}
+                    </select>
                     {errors.med && (
                       <p className="flex items-center gap-1 text-xs text-red-500 font-medium">
                         <Warning2 size={12} color="currentColor" />
@@ -494,26 +473,19 @@ export default function App() {
                   {med && (
                     <div className="space-y-1.5 animate-fade-up" style={{ animationFillMode: 'both' }}>
                       <Label className="text-sm font-bold text-foreground">Concentração</Label>
-                      <Select
+                      <select
                         value={concIdx}
-                        onValueChange={(v) => { setConcIdx(v); setErrors(prev => ({ ...prev, conc: null })) }}
+                        onChange={(e) => { setConcIdx(e.target.value); setErrors(prev => ({ ...prev, conc: null })) }}
+                        className={cn(
+                          'w-full h-9 rounded-lg border border-border bg-muted px-3 text-sm transition-all appearance-none bg-[url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 fill=%27%23666%27 viewBox=%270 0 16 16%27%3E%3Cpath d=%27M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z%27/%3E%3C/svg%3E")] bg-[length:12px] bg-[right_12px_center] bg-no-repeat focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue',
+                          errors.conc && 'border-red-400 bg-red-50/50'
+                        )}
                       >
-                        <SelectTrigger
-                          className={cn(
-                            'w-full h-9 rounded-lg border-border bg-muted transition-all',
-                            errors.conc && 'border-red-400 bg-red-50/50'
-                          )}
-                        >
-                          <SelectValue placeholder="Selecione a concentração" />
-                        </SelectTrigger>
-                        <SelectContent className="rounded-lg border-border shadow-xl">
-                          {med.concentrations.map((c, i) => (
-                            <SelectItem key={i} value={String(i)} className="rounded-lg cursor-pointer">
-                              {c.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        <option value="" disabled>Selecione a concentração</option>
+                        {med.concentrations.map((c, i) => (
+                          <option key={i} value={String(i)}>{c.label}</option>
+                        ))}
+                      </select>
                       {errors.conc && (
                         <p className="flex items-center gap-1 text-xs text-red-500 font-medium">
                           <Warning2 size={12} color="currentColor" />
