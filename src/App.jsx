@@ -16,7 +16,7 @@ import {
   DocumentText, Warning2, Facebook, Instagram,
   VideoPlay, StatusUp, SearchNormal1, Flash,
   Element3, HambergerMenu, Book1, Gift, Briefcase,
-  Heart, Blend2, Note, Clock,
+  Heart, Blend2, Note, Clock, Timer1, MedalStar,
 } from './icons'
 
 // ─── MEDICATION DATABASE ───
