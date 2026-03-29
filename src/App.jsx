@@ -722,9 +722,9 @@ export default function App() {
             </h3>
           </div>
 
+          {/* ── GRID 1: EMS ── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              /* ── ROW 1: Novos cards (acima) ── */
               {
                 category: 'Educação Médica',
                 brand: 'EMS Academy',
@@ -761,7 +761,48 @@ export default function App() {
                 accentColor: '#F43F5E',
                 buttonGradient: 'linear-gradient(135deg, #F43F5E, #E11D48)',
               },
-              /* ── ROW 2: Cards originais (abaixo) ── */
+            ].map(({ category, brand, icon: CardIcon, description, iconColor, accentColor, buttonGradient }) => (
+              <Card
+                key={brand}
+                className="flex flex-col justify-between rounded-2xl border border-border bg-card shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 overflow-hidden group"
+              >
+                <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${accentColor}, color-mix(in srgb, ${accentColor} 67%, transparent))` }} />
+                <CardHeader className="pb-2 pt-5 px-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: accentColor }}>{category}</div>
+                      <CardTitle className="text-lg font-extrabold text-foreground capitalize">{brand}</CardTitle>
+                    </div>
+                    <div className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br', iconColor)}>
+                      <CardIcon size={18} variant="Bold" color="currentColor" className="text-white" />
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="px-5 pb-4">
+                  <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+                </CardContent>
+                <CardFooter className="px-5 pb-5 pt-0 border-t-0 bg-transparent">
+                  <Button className="w-full rounded-lg h-9 text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg gap-2" style={{ background: buttonGradient }}>
+                    Quero saber mais <ArrowRight size={15} color="currentColor" />
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+
+          {/* ── DIVISOR PARCEIROS ── */}
+          <div className="relative flex items-center gap-4 my-8">
+            <div className="flex-1 h-px bg-border" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 shrink-0">
+              <Element3 size={13} variant="Bold" color="currentColor" className="text-brand-cyan" />
+              <span className="text-brand-cyan text-xs font-bold tracking-wide uppercase">Parceiros</span>
+            </div>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          {/* ── GRID 2: Parceiros ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
               {
                 category: 'Prescrição Digital',
                 brand: 'mevo',
@@ -803,49 +844,24 @@ export default function App() {
                 key={brand}
                 className="flex flex-col justify-between rounded-2xl border border-border bg-card shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 overflow-hidden group"
               >
-                {/* Top colored line per card */}
-                <div
-                  className="h-1 w-full"
-                  style={{ background: `linear-gradient(90deg, ${accentColor}, color-mix(in srgb, ${accentColor} 67%, transparent))` }}
-                />
-
+                <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${accentColor}, color-mix(in srgb, ${accentColor} 67%, transparent))` }} />
                 <CardHeader className="pb-2 pt-5 px-5">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <div
-                        className="text-[10px] font-bold uppercase tracking-widest mb-1.5"
-                        style={{ color: accentColor }}
-                      >
-                        {category}
-                      </div>
-                      <CardTitle
-                        className="text-lg font-extrabold text-foreground capitalize"
-                      >
-                        {brand}
-                      </CardTitle>
+                      <div className="text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: accentColor }}>{category}</div>
+                      <CardTitle className="text-lg font-extrabold text-foreground capitalize">{brand}</CardTitle>
                     </div>
-                    <div
-                      className={cn(
-                        'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br',
-                        iconColor
-                      )}
-                    >
+                    <div className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br', iconColor)}>
                       <CardIcon size={18} variant="Bold" color="currentColor" className="text-white" />
                     </div>
                   </div>
                 </CardHeader>
-
                 <CardContent className="px-5 pb-4">
                   <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
                 </CardContent>
-
                 <CardFooter className="px-5 pb-5 pt-0 border-t-0 bg-transparent">
-                  <Button
-                    className="w-full rounded-lg h-9 text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg gap-2"
-                    style={{ background: buttonGradient }}
-                  >
-                    Quero saber mais
-                    <ArrowRight size={15} color="currentColor" />
+                  <Button className="w-full rounded-lg h-9 text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg gap-2" style={{ background: buttonGradient }}>
+                    Quero saber mais <ArrowRight size={15} color="currentColor" />
                   </Button>
                 </CardFooter>
               </Card>
