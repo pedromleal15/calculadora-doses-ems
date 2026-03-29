@@ -16,7 +16,7 @@ import {
   DocumentText, Warning2, Facebook, Instagram,
   VideoPlay, StatusUp, SearchNormal1, Flash,
   Element3, HambergerMenu, Book1, Gift, Briefcase,
-  Heart, Blend2, Note, Clock, Timer1, MedalStar,
+  Heart, Blend2, Note, Clock, Timer1, MedalStar, Profile2User,
 } from './icons'
 
 // ─── MEDICATION DATABASE ───
@@ -794,7 +794,7 @@ export default function App() {
           <div className="relative flex items-center gap-4 my-8">
             <div className="flex-1 h-px bg-border" />
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 shrink-0">
-              <Element3 size={13} variant="Bold" color="currentColor" className="text-brand-cyan" />
+              <Profile2User size={13} variant="Bold" color="currentColor" className="text-brand-cyan" />
               <span className="text-brand-cyan text-xs font-bold tracking-wide uppercase">Parceiros</span>
             </div>
             <div className="flex-1 h-px bg-border" />
